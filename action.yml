@@ -1,0 +1,17 @@
+name: 'Update WordPress Readme Screenshots'
+description: 'Updates WordPress Readme Screenshots'
+author: 'EvrPress'
+inputs:
+  php-version:
+    description: 'used PHP version'
+    default: '7.4'
+  extensions:
+    description: 'used PHP extensions'
+    default: 'imagick, swoole'
+runs:
+  using: 'composite'
+  steps:
+    - uses: actions/checkout@master
+    - id: deploy
+      run: ${{ github.action_path }}/run.sh
+      shell: bash
