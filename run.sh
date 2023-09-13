@@ -17,6 +17,8 @@ if [ "$FILEHASH" == "$NEWFILEHASH" ]; then
     exit 0
 fi
 
+echo "✓ Readme changed, committing"
+
 git config user.name "${GITHUB_ACTOR}"
 git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 
