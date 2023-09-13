@@ -6,7 +6,18 @@
 # it does not exit with a 0, and I only care about the final exit.
 set -eo
 
-php /home/runner/work/_actions/evrpress/action-wordpress-plugin-readme-screenshot-update/main/convert.php
+FILEHASH=$(sha1sum README.md)
+
+php "${GITHUB_ACTION_PATH}/convert.php"
+
+NEWFILEHASH=$(sha1sum README.md)
+
+if [ "$FILEHASH" == "$NEWFILEHASH" ]; then
+    echo "✓ Readme not changed, exiting"
+    exit 0
+fi
+
+echo "✓ Readme changed, committing"
 
 git config user.name "${GITHUB_ACTOR}"
 git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
